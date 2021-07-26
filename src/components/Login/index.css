@@ -12,6 +12,9 @@
     background-image: url('https://res.cloudinary.com/breakingbad/image/upload/v1626015497/netfilx_1_byueud.png');
     background-size: cover;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

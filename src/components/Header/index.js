@@ -12,7 +12,7 @@ class Header extends Component {
 
     const userInput = localStorage.getItem('user_input')
 
-    if (userInput === undefined) {
+    if (userInput === null) {
       localStorage.setItem('user_input', '')
     } else {
       localStorage.setItem('user_input', `${userInput}`)

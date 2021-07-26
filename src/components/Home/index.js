@@ -86,7 +86,7 @@ class Home extends Component {
           style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
-            height: '70vh',
+            height: '75vh',
             backgroundRepeat: 'no-repeat',
           }}
         >
