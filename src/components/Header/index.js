@@ -4,22 +4,24 @@ import {Component} from 'react'
 
 import './index.css'
 
+const localStorageInput = localStorage.getItem('user_input')
+
+if (localStorageInput === null) {
+  localStorage.setItem('user_input', '')
+} else {
+  localStorage.setItem('user_input', `${localStorageInput}`)
+}
+
 class Header extends Component {
   constructor(props) {
     super(props)
 
     const {searchIconContainer = false} = this.props
 
-    const userInput = localStorage.getItem('user_input')
-
-    if (userInput === null) {
-      localStorage.setItem('user_input', '')
-    } else {
-      localStorage.setItem('user_input', `${userInput}`)
-    }
+    const userEnteredInput = localStorage.getItem('user_input')
 
     this.state = {
-      userInput,
+      userInput: userEnteredInput,
       showMenu: false,
       searchIconElement: true,
       searchIconContainer,
