@@ -20,6 +20,7 @@ class HomeSearch extends Component {
     this.state = {
       userInput,
       pageNumber: 1,
+      totalPages: 1,
       isLoading: true,
       showNotFound: false,
       moviesList: [],
@@ -50,10 +51,20 @@ class HomeSearch extends Component {
       eachMovie => eachMovie.posterPath !== null,
     )
 
+    let totalPages = 1
+
+    if (searchedMoviesJsonResponse.total_pages > 20) {
+      totalPages = 20
+    } else {
+      totalPages = searchedMoviesJsonResponse.total_pages
+    }
+
     if (filteredSearchedMoviesResponse.length === 0) {
       this.setState({isLoading: false, showNotFound: true})
     } else {
       this.setState({
+        pageNumber: searchedMoviesJsonResponse.page,
+        totalPages,
         isLoading: false,
         showNotFound: false,
         moviesList: filteredSearchedMoviesResponse,
@@ -63,9 +74,6 @@ class HomeSearch extends Component {
 
   getInputValue = value => {
     const {userInput} = this.state
-
-    console.log(userInput)
-    console.log(value)
 
     if (userInput !== value) {
       this.setState({
@@ -80,11 +88,11 @@ class HomeSearch extends Component {
   }
 
   onClickRightIcon = () => {
-    const {userInput, pageNumber} = this.state
+    const {userInput, pageNumber, totalPages} = this.state
 
     let integerNumber = pageNumber
 
-    if (integerNumber < 20) {
+    if (integerNumber < totalPages) {
       integerNumber += 1
 
       this.setState({
@@ -116,7 +124,7 @@ class HomeSearch extends Component {
   }
 
   renderPageNumber = () => {
-    const {pageNumber} = this.state
+    const {pageNumber, totalPages} = this.state
 
     return (
       <div className="page-numbers-container">
@@ -130,7 +138,9 @@ class HomeSearch extends Component {
             src="https://res.cloudinary.com/breakingbad/image/upload/v1626348232/Icon_xddcty.png"
           />
         </button>
-        <p className="page-numbers-paragraph">{pageNumber} of 20</p>
+        <p className="page-numbers-paragraph">
+          {pageNumber} of {totalPages}
+        </p>
         <button
           onClick={this.onClickRightIcon}
           type="button"

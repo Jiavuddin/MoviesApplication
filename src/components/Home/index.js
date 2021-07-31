@@ -21,21 +21,23 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.fetchData()
+    const pageNumber = Math.ceil(Math.random() * 500)
+
+    this.fetchData(pageNumber)
   }
 
-  fetchData = async () => {
+  fetchData = async pageNumber => {
     const options = {
       method: 'GET',
     }
 
-    const originalsUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}`
+    const originalsUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${pageNumber}`
 
     const response = await fetch(originalsUrl, options)
     const data = await response.json()
 
     const filteredData = data.results.filter(
-      eachMovie => eachMovie.poster_path !== null,
+      eachMovie => eachMovie.poster_path !== null && eachMovie.overview !== '',
     )
 
     const randomMovie =

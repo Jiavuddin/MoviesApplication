@@ -29,6 +29,8 @@ class Movies extends Component {
     const moviesResponse = await fetch(apiUrl, options)
     const moviesData = await moviesResponse.json()
 
+    console.log(moviesData)
+
     const updatedMovieDetails = {
       id: moviesData.id,
       posterPath: moviesData.poster_path,
