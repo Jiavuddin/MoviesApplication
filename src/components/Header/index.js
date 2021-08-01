@@ -42,7 +42,9 @@ class Header extends Component {
     this.setState(prevState => ({showMenu: !prevState.showMenu}))
   }
 
-  onClickSearchInputIcon = () => {
+  onClickSearchInputIcon = event => {
+    event.preventDefault()
+
     const {userInput} = this.state
     const {getInputAccess = () => {}} = this.props
 
@@ -135,20 +137,24 @@ class Header extends Component {
           />
         )}
         {searchIconContainer && (
-          <div className="search-input-container">
+          <form
+            className="search-input-container"
+            onSubmit={this.onClickSearchInputIcon}
+          >
             <input
               onChange={this.onChangeInput}
               value={userInput}
               type="text"
               className="search-input-element"
             />
-            <img
-              onClick={this.onClickSearchInputIcon}
-              alt="search-container-logo"
-              className="container-search-logo"
-              src="https://res.cloudinary.com/breakingbad/image/upload/v1626162280/search_er6u41.png"
-            />
-          </div>
+            <button type="submit" className="search-image-button">
+              <img
+                alt="search-container-logo"
+                className="container-search-logo"
+                src="https://res.cloudinary.com/breakingbad/image/upload/v1626162280/search_er6u41.png"
+              />
+            </button>
+          </form>
         )}
         {avatarIcon && (
           <button

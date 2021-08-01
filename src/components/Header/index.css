@@ -172,12 +172,17 @@
   }
 }
 
+.search-image-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
 .container-search-logo {
   width: 24px;
   height: 24px;
   color: #ffffff;
-  cursor: pointer;
-  outline: none;
 }
 
 @media screen and (min-width: 768px) {
