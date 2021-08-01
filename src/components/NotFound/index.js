@@ -5,6 +5,7 @@ import Header from '../Header'
 const NotFound = props => {
   const onClickHomeButton = () => {
     const {history} = props
+
     history.replace('/')
   }
 

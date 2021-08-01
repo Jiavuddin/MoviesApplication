@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom'
 
 import {Component} from 'react'
 
+import Cookies from 'js-cookie'
+
 import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
@@ -26,7 +28,12 @@ class Popular extends Component {
   fetchPopularMovies = async id => {
     const popularMoviesApi = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${id}`
 
+    const accessToken = Cookies.get('access_token')
+
     const options = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
       method: 'GET',
     }
 

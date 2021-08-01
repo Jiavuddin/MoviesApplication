@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+import Cookies from 'js-cookie'
+
 import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
@@ -17,7 +19,7 @@ const originalsApi = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}
 class Home extends Component {
   state = {
     isLoading: true,
-    randomOriginal: '',
+    randomOriginal: {},
   }
 
   componentDidMount() {
@@ -27,11 +29,16 @@ class Home extends Component {
   }
 
   fetchData = async pageNumber => {
+    const originalsUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${pageNumber}`
+
+    const accessToken = Cookies.get('access_token')
+
     const options = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
       method: 'GET',
     }
-
-    const originalsUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${pageNumber}`
 
     const response = await fetch(originalsUrl, options)
     const data = await response.json()

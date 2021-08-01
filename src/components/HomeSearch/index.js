@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom'
 
 import {Component} from 'react'
 
+import Cookies from 'js-cookie'
+
 import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
@@ -36,7 +38,16 @@ class HomeSearch extends Component {
   fetchMovieDetails = async (userInput, pageNumber) => {
     const searchedMoviesUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${userInput}&page=${pageNumber}`
 
-    const searchedMoviesResponse = await fetch(searchedMoviesUrl)
+    const accessToken = Cookies.get('access_token')
+
+    const options = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      method: 'GET',
+    }
+
+    const searchedMoviesResponse = await fetch(searchedMoviesUrl, options)
     const searchedMoviesJsonResponse = await searchedMoviesResponse.json()
 
     const updatedSearchedMoviesResponse = searchedMoviesJsonResponse.results.map(

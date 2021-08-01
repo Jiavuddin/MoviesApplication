@@ -55,6 +55,7 @@ class ReactSlick extends Component {
     fetch(`${apiUrl}`)
       .then(response => response.json())
       .then(response => {
+        console.log(response)
         this.setState({trendingMovies: response.results})
       })
   }

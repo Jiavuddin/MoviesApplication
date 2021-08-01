@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+import Cookies from 'js-cookie'
+
 import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
@@ -11,7 +13,7 @@ import './index.css'
 const apiKey = 'd521585822a0db307382160dbcd2abf7'
 
 class Movies extends Component {
-  state = {movieDetails: '', isLoading: true, similarMovies: ''}
+  state = {movieDetails: {}, isLoading: true, similarMovies: []}
 
   componentDidMount() {
     const {match} = this.props
@@ -23,13 +25,18 @@ class Movies extends Component {
 
   fetchMovieDetails = async id => {
     const apiUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`
+
+    const accessToken = Cookies.get('access_token')
+
     const options = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
       method: 'GET',
     }
+
     const moviesResponse = await fetch(apiUrl, options)
     const moviesData = await moviesResponse.json()
-
-    console.log(moviesData)
 
     const updatedMovieDetails = {
       id: moviesData.id,
@@ -48,11 +55,18 @@ class Movies extends Component {
       budget: moviesData.budget,
     }
 
-    const similarMoviesApi = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${apiKey}&language=en-US&page=${1}`
+    const pageNumber = Math.ceil(Math.random() * 500)
+
+    const similarMoviesApi = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${apiKey}&language=en-US&page=${pageNumber}`
 
     const similarMoviesResponse = await fetch(similarMoviesApi, options)
     const similarMoviesData = await similarMoviesResponse.json()
-    const similarMoviesList = similarMoviesData.results.map(eachMovie => ({
+
+    const filteredSimilarMoviesData = similarMoviesData.results.filter(
+      eachMovie => eachMovie.poster_path !== null,
+    )
+
+    const similarMoviesList = filteredSimilarMoviesData.map(eachMovie => ({
       id: eachMovie.id,
       posterPath: eachMovie.poster_path,
       title: eachMovie.title,
