@@ -11,6 +11,18 @@ const apiKey = 'd521585822a0db307382160dbcd2abf7'
 class LoginForm extends Component {
   state = {username: '', password: '', showErrorMessage: false, errorMsg: ''}
 
+  onResetPassword = () => {
+    alert(
+      'You are redirecting to a website which provides data for this application. Do follow instructions to reset the password and login with the updated password!',
+    )
+  }
+
+  OnSignUp = () => {
+    alert(
+      'You are redirecting to a website, which provides data for this application. Do follow instructions to Signup with ur details and use the same while login into this application',
+    )
+  }
+
   onLoginSuccess = token => {
     const {username, password} = this.state
 
@@ -138,6 +150,26 @@ class LoginForm extends Component {
           <button type="submit" className="sign-in-button">
             Sign in
           </button>
+          <div className="forgot-password-container">
+            <p className="forgot-password-msg">Forgot your Password ?</p>
+            <a
+              className="anchor-element"
+              href="https://www.themoviedb.org/reset-password"
+              onClick={this.onResetPassword}
+            >
+              Reset Password
+            </a>
+          </div>
+          <div className="sign-up-container">
+            <p className="sign-up-msg">New to Movies ?</p>
+            <a
+              className="anchor-element"
+              href="https://www.themoviedb.org/signup"
+              onClick={this.OnSignUp}
+            >
+              Sign up now
+            </a>
+          </div>
         </form>
       </div>
     )

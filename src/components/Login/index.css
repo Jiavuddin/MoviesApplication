@@ -51,7 +51,7 @@
     justify-content: center;
     align-items: center;
     width: 456px;
-    height: 400px;
+    height: 480px;
     border-radius: 8px;
     margin-top: 18vh;
   }
@@ -59,7 +59,8 @@
 
 @media screen and (min-width: 992px) {
   .login-form-container {
-    margin-top: 82px;
+    height: 460px;
+    margin-top: 65px;
   }
 }
 
@@ -160,4 +161,58 @@
     height: 40px;
     padding: 8px, 20px;
   }
+}
+
+.forgot-password-container {
+  display: flex;
+  align-items: center;
+  margin-top: 22px;
+}
+
+@media screen and (min-width: 768px) {
+  .forgot-password-container {
+    align-self: flex-start;
+    margin-left: 52px;
+  }
+}
+
+.forgot-password-msg {
+  color: #999;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto';
+}
+
+.anchor-element {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'HK Grotesk';
+  text-decoration: none;
+  margin-left: 18px;
+}
+
+.anchor-element:hover {
+  color: #fb923c;
+  text-decoration: underline;
+  text-decoration-color: #fb923c;
+}
+
+.sign-up-container {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .sign-up-container {
+    align-self: flex-start;
+    margin-left: 52px;
+  }
+}
+
+.sign-up-msg {
+  color: #999;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto';
 }
