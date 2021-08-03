@@ -19,9 +19,17 @@ class HomeSearch extends Component {
 
     const userInput = localStorage.getItem('user_input')
 
+    const pageNumber = localStorage.getItem('searched_movies_page_number')
+
+    if (pageNumber === null) {
+      localStorage.setItem('searched_movies_page_number', 1)
+    } else {
+      localStorage.setItem('searched_movies_page_number', `${pageNumber}`)
+    }
+
     this.state = {
       userInput,
-      pageNumber: 1,
+      pageNumber,
       totalPages: 1,
       isLoading: true,
       showNotFound: false,
@@ -80,6 +88,11 @@ class HomeSearch extends Component {
         showNotFound: false,
         moviesList: filteredSearchedMoviesResponse,
       })
+
+      localStorage.setItem(
+        'searched_movies_page_number',
+        `${searchedMoviesJsonResponse.page}`,
+      )
     }
   }
 
@@ -93,6 +106,8 @@ class HomeSearch extends Component {
         isLoading: true,
         moviesList: [],
       })
+
+      localStorage.setItem('searched_movies_page_number', `${1}`)
 
       this.fetchMovieDetails(value, 1)
     }
@@ -112,6 +127,8 @@ class HomeSearch extends Component {
         pageNumber: integerNumber,
       })
 
+      localStorage.setItem('searched_movies_page_number', `${integerNumber}`)
+
       this.fetchMovieDetails(userInput, integerNumber)
     }
   }
@@ -129,6 +146,8 @@ class HomeSearch extends Component {
         moviesList: [],
         pageNumber: integerNumber,
       })
+
+      localStorage.setItem('searched_movies_page_number', `${integerNumber}`)
 
       this.fetchMovieDetails(userInput, integerNumber)
     }
