@@ -13,13 +13,13 @@ class LoginForm extends Component {
 
   onResetPassword = () => {
     alert(
-      'You are redirecting to a website which provides data for this application. Do follow instructions to reset the password and login with the updated password!',
+      'You are re-directing to a website which provides data to this application. Do follow instructions, to reset the password and login with the same one!',
     )
   }
 
   OnSignUp = () => {
     alert(
-      'You are redirecting to a website, which provides data for this application. Do follow instructions to Signup with ur details and use the same while login into this application',
+      'You are re-directing to a website, which provides data to this application. Do follow instructions, to signup with ur details and use them while login into this application',
     )
   }
 
