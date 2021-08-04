@@ -209,7 +209,7 @@ class Header extends Component {
 
     return (
       <>
-        <div className={`header-background ${backgroundColor}`}>
+        <nav className={`header-background ${backgroundColor}`}>
           <div className="movie-logo-container">
             <Link to="/" className="link-item">
               <img
@@ -221,7 +221,7 @@ class Header extends Component {
             {this.renderMediumScreenMenuItems()}
           </div>
           {this.renderSearchAccountAndMenuItems()}
-        </div>
+        </nav>
         {this.renderMenuItems()}
       </>
     )
