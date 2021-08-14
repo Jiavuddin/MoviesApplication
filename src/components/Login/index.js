@@ -4,22 +4,30 @@ import {Redirect} from 'react-router-dom'
 
 import {Component} from 'react'
 
+import ProfilesContext from '../../Context/ProfilesContext'
+
 import './index.css'
 
 const apiKey = 'd521585822a0db307382160dbcd2abf7'
 
 class LoginForm extends Component {
-  state = {username: '', password: '', showErrorMessage: false, errorMsg: ''}
+  state = {
+    showSignIn: false,
+    username: '',
+    password: '',
+    showErrorMessage: false,
+    errorMsg: '',
+  }
 
   onResetPassword = () => {
     alert(
-      'You are re-directing to a website which provides data to this application. Do follow instructions, to reset the password and login with the same one!',
+      'You are re-directing to a website which provides data to this application. Do follow instructions, to reset the password and login with the same password!',
     )
   }
 
   OnSignUp = () => {
     alert(
-      'You are re-directing to a website, which provides data to this application. Do follow instructions, to signup with ur details and use them while login into this application',
+      'You are re-directing to a website, which provides data to this application. Do follow instructions, to signup with ur credentials and use them while login into this application',
     )
   }
 
@@ -34,7 +42,7 @@ class LoginForm extends Component {
 
     Cookies.set('access_token', token, {expires: 30})
 
-    history.replace('/')
+    history.replace('/profiles')
   }
 
   onLoginFailure = errorMsg => {
@@ -42,6 +50,7 @@ class LoginForm extends Component {
   }
 
   onSubmitUserDetails = async event => {
+    console.log(true)
     event.preventDefault()
 
     const {username, password} = this.state
@@ -123,55 +132,79 @@ class LoginForm extends Component {
     )
   }
 
-  render() {
+  renderSignInForm = () => {
     const {showErrorMessage, errorMsg} = this.state
+
+    return (
+      <ProfilesContext.Consumer>
+        {value => {
+          const {onLoginProfiles} = value
+
+          const onSubmitLoginDetailsAndUpdateProfile = () => {
+            onLoginProfiles()
+          }
+
+          return (
+            <div className="login-container">
+              <img
+                alt="movies-img"
+                className="website-logo"
+                src="https://res.cloudinary.com/breakingbad/image/upload/v1626011241/Group_7399_cl6qfz.png"
+              />
+              <form
+                className="login-form-container"
+                onSubmit={this.onSubmitUserDetails}
+              >
+                <h1 className="form-heading">Sign in</h1>
+                {this.renderUsername()}
+                {this.renderPassword()}
+                {showErrorMessage && (
+                  <p className="error-message">{errorMsg}</p>
+                )}
+                <button type="submit" className="sign-in-button">
+                  Sign in
+                </button>
+                <div className="forgot-password-container">
+                  <p className="forgot-password-msg">Forgot your Password ?</p>
+                  <a
+                    className="anchor-element"
+                    href="https://www.themoviedb.org/reset-password"
+                    onClick={this.onResetPassword}
+                  >
+                    Reset Password
+                  </a>
+                </div>
+                <div className="sign-up-container">
+                  <p className="sign-up-msg">New to Movies ?</p>
+                  <a
+                    className="anchor-element"
+                    href="https://www.themoviedb.org/signup"
+                    onClick={this.OnSignUp}
+                  >
+                    Sign up now
+                  </a>
+                </div>
+              </form>
+            </div>
+          )
+        }}
+      </ProfilesContext.Consumer>
+    )
+  }
+
+  renderIntroduction = () => <div className="movies-introduction-page">{}</div>
+
+  render() {
+    const {showSignIn} = this.state
 
     const accessToken = Cookies.get('access_token')
 
     if (accessToken !== undefined) {
-      return <Redirect to="/" />
+      return <Redirect to="/profiles" />
     }
 
     return (
-      <div className="login-container">
-        <img
-          alt="movies-img"
-          className="website-logo"
-          src="https://res.cloudinary.com/breakingbad/image/upload/v1626011241/Group_7399_cl6qfz.png"
-        />
-        <form
-          className="login-form-container"
-          onSubmit={this.onSubmitUserDetails}
-        >
-          <h1 className="form-heading">Sign in</h1>
-          {this.renderUsername()}
-          {this.renderPassword()}
-          {showErrorMessage && <p className="error-message">{errorMsg}</p>}
-          <button type="submit" className="sign-in-button">
-            Sign in
-          </button>
-          <div className="forgot-password-container">
-            <p className="forgot-password-msg">Forgot your Password ?</p>
-            <a
-              className="anchor-element"
-              href="https://www.themoviedb.org/reset-password"
-              onClick={this.onResetPassword}
-            >
-              Reset Password
-            </a>
-          </div>
-          <div className="sign-up-container">
-            <p className="sign-up-msg">New to Movies ?</p>
-            <a
-              className="anchor-element"
-              href="https://www.themoviedb.org/signup"
-              onClick={this.OnSignUp}
-            >
-              Sign up now
-            </a>
-          </div>
-        </form>
-      </div>
+      <>{showSignIn ? this.renderIntroduction() : this.renderSignInForm()}</>
     )
   }
 }

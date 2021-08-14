@@ -91,8 +91,13 @@
   margin-right: 25px;
 }
 
+.false-menu-list-color {
+  color: #131313 !important;
+}
+
 .active-list-item {
   font-weight: 900;
+  color: red !important;
 }
 
 .search-menu-container {
@@ -197,7 +202,7 @@
 
 @media screen and (min-width: 768px) {
   .avatar-button {
-    background-color: #ffffff;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -208,6 +213,13 @@
     cursor: pointer;
     outline: none;
   }
+}
+
+.avatar-logo {
+  height: 48px;
+  width: 48px;
+  border: none;
+  border-radius: 15px;
 }
 
 .menu-logo {
@@ -242,10 +254,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-
-.false-menu-list-color {
-  color: #131313 !important;
 }
 
 .list-icon {

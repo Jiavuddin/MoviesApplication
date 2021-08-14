@@ -124,7 +124,22 @@ class Header extends Component {
     const {userInput, searchIconContainer, searchIconElement} = this.state
     const {searchIcon = true, avatarIcon = true} = this.props
 
+    let avatarUrl =
+      'https://res.cloudinary.com/breakingbad/image/upload/v1626183993/Mask_Group_qjad2b.png'
+
     localStorage.setItem('user_input', userInput)
+
+    const activeProfile = localStorage.getItem('activeProfile')
+
+    if (activeProfile !== null) {
+      const ProfileDetails = JSON.parse(activeProfile)
+
+      const {imageUrl} = ProfileDetails
+
+      if (imageUrl !== undefined) {
+        avatarUrl = imageUrl
+      }
+    }
 
     return (
       <div className="search-menu-container">
@@ -162,10 +177,7 @@ class Header extends Component {
             className="avatar-button"
             onClick={this.onClickAvatarButton}
           >
-            <img
-              alt="avatar-logo"
-              src="https://res.cloudinary.com/breakingbad/image/upload/v1626183993/Mask_Group_qjad2b.png"
-            />
+            <img alt="avatar-logo" className="avatar-logo" src={avatarUrl} />
           </button>
         )}
         <img

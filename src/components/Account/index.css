@@ -244,6 +244,11 @@
   outline: none;
 }
 
+.logout-button:hover {
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+}
+
 @media screen and (min-width: 768px) {
   .logout-button {
     font-weight: 700;
