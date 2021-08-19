@@ -10,13 +10,27 @@ import './index.css'
 
 const apiKey = 'd521585822a0db307382160dbcd2abf7'
 
+const SignInOption = localStorage.getItem('signIn')
+
+if (SignInOption === null) {
+  localStorage.setItem('signIn', JSON.stringify(false))
+} else if (JSON.parse(SignInOption) === false) {
+  localStorage.setItem('signIn', JSON.stringify(true))
+}
+
 class LoginForm extends Component {
-  state = {
-    showSignIn: false,
-    username: '',
-    password: '',
-    showErrorMessage: false,
-    errorMsg: '',
+  constructor(props) {
+    super(props)
+
+    const showSignIn = localStorage.getItem('signIn')
+
+    this.state = {
+      showSignIn: JSON.parse(showSignIn),
+      username: '',
+      password: '',
+      showErrorMessage: false,
+      errorMsg: '',
+    }
   }
 
   onResetPassword = () => {
@@ -50,7 +64,6 @@ class LoginForm extends Component {
   }
 
   onSubmitUserDetails = async event => {
-    console.log(true)
     event.preventDefault()
 
     const {username, password} = this.state
@@ -90,6 +103,10 @@ class LoginForm extends Component {
 
   onChangePassword = event => {
     this.setState({password: event.target.value, showErrorMessage: false})
+  }
+
+  OnIntroToSignIn = () => {
+    this.setState({showSignIn: true})
   }
 
   renderPassword = () => {
@@ -192,10 +209,36 @@ class LoginForm extends Component {
     )
   }
 
-  renderIntroduction = () => <div className="movies-introduction-page">{}</div>
+  renderIntroduction = () => (
+    <div className="movies-introduction-page">
+      <div className="movies-introduction-cover-page">
+        <div className="movie-introduction-logo-sign-in-container">
+          <img
+            alt="movies-website-logo"
+            className="movies-website-introduction-logo"
+            src="https://res.cloudinary.com/breakingbad/image/upload/v1626011241/Group_7399_cl6qfz.png"
+          />
+          <button
+            type="button"
+            className="intro-to-sign-in-button"
+            onClick={this.OnIntroToSignIn}
+          >
+            Sign In
+          </button>
+        </div>
+        <div className="movies-introduction-content-container">{}</div>
+      </div>
+    </div>
+  )
 
   render() {
     const {showSignIn} = this.state
+
+    const SignInData = localStorage.getItem('signIn')
+
+    if (JSON.parse(SignInData) !== showSignIn) {
+      localStorage.setItem('signIn', JSON.stringify(showSignIn))
+    }
 
     const accessToken = Cookies.get('access_token')
 
@@ -204,7 +247,7 @@ class LoginForm extends Component {
     }
 
     return (
-      <>{showSignIn ? this.renderIntroduction() : this.renderSignInForm()}</>
+      <>{showSignIn ? this.renderSignInForm() : this.renderIntroduction()}</>
     )
   }
 }

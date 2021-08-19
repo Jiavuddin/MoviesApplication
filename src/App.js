@@ -45,7 +45,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(true)
     const userDetails = localStorage.getItem('userDetails')
 
     let pattern = ''
@@ -68,10 +67,6 @@ class App extends Component {
     }
 
     this.setState({profilesList: JSON.parse(profilesList)})
-  }
-
-  onLoginProfiles = () => {
-    this.componentDidMount()
   }
 
   addProfile = profileDetails => {

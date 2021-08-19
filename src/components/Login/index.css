@@ -1,4 +1,106 @@
 .movies-introduction-page {
+  background-image: url('https://res.cloudinary.com/breakingbad/image/upload/v1628852087/IN-en-20210719-popsignuptwoweeks-perspective_alpha_website_large_r797fw.jpg');
+  background-size: cover;
+  height: 100vh;
+}
+
+.movies-introduction-cover-page {
+  background-image: linear-gradient(
+    180deg,
+    rgba(24, 24, 24, 0.546875) 100%,
+    rgba(24, 24, 24, 0.546875) 48.26%,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(24, 24, 24, 0.546875) 48.26%,
+    rgba(24, 24, 24, 0.546875) 100%
+  );
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-introduction-logo-sign-in-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 14vh;
+  padding: 0px 22px;
+}
+
+@media screen and (min-width: 768px) {
+  .movie-introduction-logo-sign-in-container {
+    height: 12vh;
+    padding: 0px 52px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .movie-introduction-logo-sign-in-container {
+    height: 15vh;
+    padding: 0px 52px;
+  }
+}
+
+.movies-website-introduction-logo {
+  height: 27px;
+  width: 100px;
+}
+
+@media screen and (min-width: 768px) {
+  .movies-website-introduction-logo {
+    height: 38px;
+    width: 130px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .movies-website-introduction-logo {
+    height: 42px;
+    width: 140px;
+  }
+}
+
+.intro-to-sign-in-button {
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  color: #ffffff;
+  background-color: rgb(204, 0, 0);
+  height: 32px;
+  width: 72px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-to-sign-in-button:hover {
+  background-color: hsl(0, 100%, 56%);
+}
+
+@media screen and (min-width: 768px) {
+  .intro-to-sign-in-button {
+    font-size: 20px;
+    height: 42px;
+    width: 95px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .intro-to-sign-in-button {
+    font-size: 20px;
+    font-weight: 400;
+    height: 42px;
+  }
+}
+
+.movies-introduction-content-container {
+  flex-grow: 1;
 }
 
 .login-container {

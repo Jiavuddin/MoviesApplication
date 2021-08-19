@@ -22,6 +22,8 @@ const Account = props => {
 
     localStorage.removeItem('userDetails')
 
+    localStorage.removeItem('signIn')
+
     localStorage.removeItem('user_input')
 
     localStorage.removeItem('searched_movies_page_number')
